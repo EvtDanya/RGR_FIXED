@@ -319,8 +319,12 @@ string EncryptForKey(string cEng) {
             if ((cEng[i] + key) > 90) { cEngCrypted[i] = (cEng[i] + key) % 90 + 64; }
             else { cEngCrypted[i] = cEng[i] + key; }
         }
-        else {
+        else if (cEng[i] >= 97 && cEng[i] <= 122) {
             if ((cEng[i] + key) > 122) { cEngCrypted[i] = (cEng[i] + key) % 122 + 96; }
+            else { cEngCrypted[i] = cEng[i] + key; }
+        }
+        else if (cEng[i] >= 48 && cEng[i] <= 57) {
+            if ((cEng[i] + key) > 57) { cEngCrypted[i] = (cEng[i] + key) % 57 + 48; }
             else { cEngCrypted[i] = cEng[i] + key; }
         }
         i++;
@@ -348,6 +352,12 @@ string DecryptForKey(string cEng) {
             else {
                 cEngDeCrypted[i] = cEng[i] - keyEng;
             }
+        }
+        else if (cEng[i] >= 48 && cEng[i] <= 57) {
+            if ((cEng[i] - keyEng) < 48) {
+                cEngDeCrypted[i] = 58 - abs((cEng[i] - keyEng - 48)) % 10;
+            }
+            else { cEngDeCrypted[i] = cEng[i] - keyEng; }
         }
         i++;
     }
