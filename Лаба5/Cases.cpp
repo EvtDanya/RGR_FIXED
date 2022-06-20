@@ -84,7 +84,7 @@ void EncryptCases(string& psw, string& psw_confirm, string& path, string& key, b
     switch (choise_cypher) {//depending on the key pressed
     case '1': {
         needkey = true;//the cypher need a key
-        keyoption = 3;//we can enter only letters for this key
+        keyoption = 2;//we can enter only numbers for this key
         nymbofcyph = 1;//Number of cypher we want to use
         EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
         break;
@@ -103,14 +103,14 @@ void EncryptCases(string& psw, string& psw_confirm, string& path, string& key, b
     }
     case '4': {
         needkey = true;//the cypher does not need a key
-        keyoption = 3;//we can enter only numbers for this key
+        keyoption = 3;//we can enter only letters for this key
         nymbofcyph = 4;//Number of cypher we want to use
         EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
         break;
     }
     case '5': {
         needkey = true;//the cypher does not need a key
-        keyoption = 3;//we can enter only numbers for this key
+        keyoption = 3;//we can enter only letters for this key
         nymbofcyph = 5;//Number of cypher we want to use
         EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
         break;
