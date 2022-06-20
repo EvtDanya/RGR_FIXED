@@ -182,15 +182,14 @@ string Decrypt6(string text) {
     string decr;
     vector<string> morse;
     morse = split(text, ' ');
-    for (auto i = 0; i < morse.size(); i++)
-    {
-        if (morse[i] == "")
+    for (auto str : morse) {
+        if (str == "")
         {
             decr += " ";
         }
         for (auto j = 0; j < lang.size(); j++)
         {
-            if (lang[j].key == morse[i])
+            if (lang[j].key == str)
             {
                 decr += lang[j].englow;
             }
