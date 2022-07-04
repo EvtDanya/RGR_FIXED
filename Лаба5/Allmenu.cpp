@@ -118,24 +118,94 @@ void Picture() { //output picture
     Sleep(2000);//wait for 2 seconds
     system("cls");//clear the screen
 }
-void MainMenu(int header) { //For printing the main menu
+int PositionInMenu(int count_of_menus, int option, bool& esc) {
+    int pos = 1;
+    while (1) {
+        if (option == 1) {
+            MainMenu(1, pos);
+        }
+        else {
+            ChooseCypherMenu(2, pos);
+        }
+        int choose_pos = _getch();
+        if (choose_pos == 224) {//arrows
+            choose_pos = _getch();
+            if (choose_pos == 72) {//up
+                if (pos > 1) {
+                    pos -= 1;
+                }
+            }
+            else if (choose_pos == 80) {//down
+                if (pos < count_of_menus) {
+                    pos += 1;
+                }
+            }
+        }
+        else if (choose_pos == 13) {//enter
+            break;
+        }
+        else if (choose_pos == 27) {
+            if (option != 1) {
+                esc = true;
+                break;
+            }
+        }
+    }
+    return pos;
+}
+void MainMenu(int header, int pos) { //For printing the main menu
     system("cls");//clear the screen
     Header(header);
+    cout << "Choose one of the options with arrows and press \'Enter\'\n";
+    if (pos == 1) {
+        cout << setw(50) << "--> \x1b[31mencryption\x1b[0m <--\n"; //output red text with construction \x1b[31m...\x1b[0m
+        cout << setw(46) << "  \x1b[31mdecryption\x1b[0m\n"; //output red text
+    }
+    else {
+        cout << setw(46) << "  \x1b[31mencryption\x1b[0m\n"; //output red text with construction \x1b[31m...\x1b[0m
+        cout << setw(50) << "--> \x1b[31mdecryption\x1b[0m <--\n"; //output red text
+    }
     cout << "All characters except English letters and numbers are ignored!\n";
-    cout << "Press \"1\": \x1b[31mencryption\x1b[0m\n"; //output red text with construction \x1b[31m...\x1b[0m
-    cout << "Press \"2\": \x1b[31mdecryption\x1b[0m\n"; //output red text
     cout << "The decryption file is obtained by encrypting the message thro-\nugh the program, due to the password is hashed and the key is \nencrypted. ";
     cout << "English letters and numbers are encrypted (not in \nall ciphers). ";
     cout << "The message can contain several lines.\n";
     cout << "Press \"Esc\": \x1b[31mexit the programm\x1b[0m\n"; //output red text
     Separate();
 }
-void ChooseCypherMenu(int header) {//for printing the menu with choosing cyphers
+void ChooseCypherMenu(int header, int pos) {//for printing the menu with choosing cyphers
     system("cls"); //clear the screen
     Header(header);
-    cout << "1 - Gronsfeld cipher" << setw(36) << "4 - The Vigener Cipher*\n";
-    cout << "2 - Tarabarskaya gramota" << setw(30) << "5 - The Vernam cipher\n";
-    cout << "3 - The Atbash cipher" << setw(28) << "6 - Morse Code**\n";
+    cout << "Choose one of the ciphers with arrows and press \'Enter\'\n";
+    if (pos == 1) {
+        cout << "--> 1 - Gronsfeld cipher <--" << setw(32) << "4 - The Vigener Cipher*\n";
+        cout << "    2 - Tarabarskaya gramota" << setw(30) << "5 - The Vernam cipher\n";
+        cout << "    3 - The Atbash cipher" << setw(28) << "6 - Morse Code**\n";
+    }
+    else if (pos == 2) {
+        cout << "    1 - Gronsfeld cipher" << setw(36) << "4 - The Vigener Cipher*\n";
+        cout << "--> 2 - Tarabarskaya gramota <--" << setw(26) << "5 - The Vernam cipher\n";
+        cout << "    3 - The Atbash cipher" << setw(28) << "6 - Morse Code**\n";
+    }
+    else if (pos == 3) {
+        cout << "    1 - Gronsfeld cipher" << setw(36) << "4 - The Vigener Cipher*\n";
+        cout << "    2 - Tarabarskaya gramota" << setw(30) << "5 - The Vernam cipher\n";
+        cout << "--> 3 - The Atbash cipher <--" << setw(24) << "6 - Morse Code**\n";
+    }
+    else if (pos == 4) {
+        cout << "    1 - Gronsfeld cipher" << setw(40) << "--> 4 - The Vigener Cipher* <--\n";
+        cout << "    2 - Tarabarskaya gramota" << setw(30) << "5 - The Vernam cipher\n";
+        cout << "    3 - The Atbash cipher" << setw(28) << "6 - Morse Code**\n";
+    }
+    else if (pos == 5) {
+        cout << "    1 - Gronsfeld cipher" << setw(36) << "4 - The Vigener Cipher*\n";
+        cout << "    2 - Tarabarskaya gramota" << setw(34) << "--> 5 - The Vernam cipher <--\n";
+        cout << "    3 - The Atbash cipher" << setw(28) << "6 - Morse Code**\n";
+    }
+    else if (pos == 6) {
+        cout << "    1 - Gronsfeld cipher" << setw(36) << "4 - The Vigener Cipher*\n";
+        cout << "    2 - Tarabarskaya gramota" << setw(30) << "5 - The Vernam cipher\n";
+        cout << "    3 - The Atbash cipher" << setw(32) << "--> 6 - Morse Code** <--\n";
+    }
     cout << "* lowercase letters become uppercase letters(for key too)\n";
     cout << "** some symbols are not readable, they are deleted, uppercase\n";
     cout << "letters become lowercase\n";

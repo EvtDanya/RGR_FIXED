@@ -79,54 +79,54 @@ void EncryptCase(int keyoption, int numbofcyph, string& psw, string& psw_confirm
 }
 void EncryptCases(string& psw, string& psw_confirm, string& path, string& key, bool& go_out, bool& esc, bool& needkey, vector <string>& contwithstr) {
     int keyoption = 2, nymbofcyph = 1;
-    ChooseCypherMenu(2);
-    char choise_cypher = _getch();//waiting for a key to be pressed
-    switch (choise_cypher) {//depending on the key pressed
-    case '1': {
-        needkey = true;//the cypher need a key
-        keyoption = 2;//we can enter only numbers for this key
-        nymbofcyph = 1;//Number of cypher we want to use
-        EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
-        break;
+    int pos = PositionInMenu(6, 2, esc);
+    if (!esc) {
+        switch (pos) {//depending on the key pressed
+        case 1: {
+            needkey = true;//the cypher need a key
+            keyoption = 2;//we can enter only numbers for this key
+            nymbofcyph = 1;//Number of cypher we want to use
+            EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
+            break;
+        }
+        case 2: {
+            needkey = false;//the cypher does not need a key    
+            nymbofcyph = 2;//Number of cypher we want to use
+            EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
+            break;
+        }
+        case 3: {
+            needkey = false;//the cypher does not need a key
+            nymbofcyph = 3;//Number of cypher we want to use
+            EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
+            break;
+        }
+        case 4: {
+            needkey = true;//the cypher does not need a key
+            keyoption = 3;//we can enter only letters for this key
+            nymbofcyph = 4;//Number of cypher we want to use
+            EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
+            break;
+        }
+        case 5: {
+            needkey = true;//the cypher does not need a key
+            keyoption = 3;//we can enter only letters for this key
+            nymbofcyph = 5;//Number of cypher we want to use
+            EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
+            break;
+        }
+        case 6: {
+            needkey = false;//the cypher does not need a key
+            nymbofcyph = 6;//Number of cypher we want to use
+            EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
+            break;
+        }
+        default: {//if the wrong key is pressed
+            OutputError(1);
+            break;
+        }
+        };
     }
-    case '2': {
-        needkey = false;//the cypher does not need a key    
-        nymbofcyph = 2;//Number of cypher we want to use
-        EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
-        break;
-    }
-    case '3': {
-        needkey = false;//the cypher does not need a key
-        nymbofcyph = 3;//Number of cypher we want to use
-        EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
-        break;
-    }
-    case '4': {
-        needkey = true;//the cypher does not need a key
-        keyoption = 3;//we can enter only letters for this key
-        nymbofcyph = 4;//Number of cypher we want to use
-        EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
-        break;
-    }
-    case '5': {
-        needkey = true;//the cypher does not need a key
-        keyoption = 3;//we can enter only letters for this key
-        nymbofcyph = 5;//Number of cypher we want to use
-        EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
-        break;
-    }
-    case '6': {
-        needkey = false;//the cypher does not need a key
-        nymbofcyph = 6;//Number of cypher we want to use
-        EncryptCase(keyoption, nymbofcyph, psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
-        break;
-    }
-    case 27: { break; } //if pressed esc
-    default: {//if the wrong key is pressed
-        OutputError(1);
-        break;
-    }
-    };
 }
 vector <string> Decryption(vector <string>& contwithstr, string key, int numbofcyph) {//encryption with the selected cypher
     for (auto i = 0; i < contwithstr.size(); i++) {
@@ -217,76 +217,81 @@ void DecryptCase(PswKeyText& pswkeytext, string& psw, string& psw_confirm, strin
 }
 void DecryptCases(PswKeyText& pswkeytext, string& psw, string& psw_confirm, string& path, bool& go_out, bool& esc, bool& needkey, vector <string>& contwithstr) {
     int keyoption = 2, nymbofcyph = 1;
-    ChooseCypherMenu(2);
-    char choise_cypher = _getch();//waiting for a key to be pressed
-    switch (choise_cypher) {//depending on the key pressed
-    case '1': {
-        needkey = true;//the cypher need a key
-        nymbofcyph = 1;//Number of cypher we want to use
-        DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
-        break;
+    int pos = PositionInMenu(6, 2, esc);
+    if (!esc) {
+        switch (pos) {//depending on the key pressed
+        case 1: {
+            needkey = true;//the cypher need a key
+            nymbofcyph = 1;//Number of cypher we want to use
+            DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
+            break;
+        }
+        case 2: {
+            needkey = false;//the cypher need a key
+            nymbofcyph = 2;//Number of cypher we want to use
+            DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
+            break;
+        }
+        case 3: {
+            needkey = false;//the cypher need a key
+            nymbofcyph = 3;//Number of cypher we want to use
+            DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
+            break;
+        }
+        case 4: {
+            needkey = true;//the cypher need a key
+            nymbofcyph = 4;//Number of cypher we want to use
+            DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
+            break;
+        }
+        case 5: {
+            needkey = true;//the cypher need a key
+            nymbofcyph = 5;//Number of cypher we want to use
+            DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
+            break;
+        }
+        case 6: {
+            needkey = false;//the cypher need a key
+            nymbofcyph = 6;//Number of cypher we want to use
+            DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
+            break;
+        }
+        default: { //if the wrong key is pressed
+            OutputError(1);
+            break;
+        }
+        };
     }
-    case '2': {
-        needkey = false;//the cypher need a key
-        nymbofcyph = 2;//Number of cypher we want to use
-        DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
+    /*else if (esc) {
         break;
-    }
-    case '3': {
-        needkey = false;//the cypher need a key
-        nymbofcyph = 3;//Number of cypher we want to use
-        DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
-        break;
-    }
-    case '4': {
-        needkey = true;//the cypher need a key
-        nymbofcyph = 4;//Number of cypher we want to use
-        DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
-        break;
-    }
-    case '5': {
-        needkey = true;//the cypher need a key
-        nymbofcyph = 5;//Number of cypher we want to use
-        DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
-        break;
-    }
-    case '6': {
-        needkey = false;//the cypher need a key
-        nymbofcyph = 6;//Number of cypher we want to use
-        DecryptCase(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr, nymbofcyph);
-        break;
-    }
-    case 27: {break; }//if pressed esc
-    default: { //if the wrong key is pressed
-        OutputError(1);
-        break;
-    }
-    };
+    }/**/
 }
 void MainMenuCases(string& psw, string& psw_confirm, string& path, string& key, bool& go_out, bool& esc, bool& needkey, vector <string>& contwithstr, PswKeyText pswkeytext) {
     while (1) { //for returning to the main menu
         go_out = false;//if the flags have already been activated, then reset
         esc = false;
-        MainMenu(1);
-        char choise_from_main_menu = _getch();//waiting for a key to be pressed
-        switch (choise_from_main_menu) //depending on the key pressed
-        {
-        case '1': {
-            EncryptCases(psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
-            break;
+        int pos = PositionInMenu(2, 1, esc);
+        if (!esc) {
+            switch (pos) //depending on the key pressed
+            {
+            case 1: {
+                EncryptCases(psw, psw_confirm, path, key, go_out, esc, needkey, contwithstr);
+                break;
+            }
+            case 2: {
+                DecryptCases(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr);
+                break;
+            }
+            default: {//if the wrong key is pressed
+                OutputError(1);
+                break;
+            }
+
+            };
         }
-        case '2': {
-            DecryptCases(pswkeytext, psw, psw_confirm, path, go_out, esc, needkey, contwithstr);
-            break;
-        }
-        case 27: {//if pressed esc
+        else if (esc) {//if pressed esc
             Picture();
             exit(0);//program shutdown
         }
-        default: {//if the wrong key is pressed
-            OutputError(1);
-            break;
-        }
-        };
     }
 }
