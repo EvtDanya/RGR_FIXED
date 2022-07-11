@@ -145,10 +145,8 @@ int PositionInMenu(int count_of_menus, int option, bool& esc) {
             break;
         }
         else if (choose_pos == 27) {
-            if (option != 1) {
-                esc = true;
-                break;
-            }
+            esc = true;
+            break;
         }
     }
     return pos;
